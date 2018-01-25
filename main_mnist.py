@@ -8,7 +8,7 @@ import torch.optim as optim
 from torchvision import datasets, transforms
 from torch.autograd import Variable
 from models.binarized_modules import  BinarizeLinear,BinarizeConv2d
-from models.binarized_modules import  Binarize,Ternarize,Ternarize2,Ternarize3,Ternarize4,HingeLoss
+from models.binarized_modules import  Binarize#,Ternarize,Ternarize2,Ternarize3,Ternarize4,HingeLoss
 # Training settings
 parser = argparse.ArgumentParser(description='PyTorch MNIST Example')
 parser.add_argument('--batch-size', type=int, default=64, metavar='N',
@@ -25,7 +25,7 @@ parser.add_argument('--no-cuda', action='store_true', default=False,
                     help='disables CUDA training')
 parser.add_argument('--seed', type=int, default=1, metavar='S',
                     help='random seed (default: 1)')
-parser.add_argument('--gpus', default=3,
+parser.add_argument('--gpus', default=0,
                     help='gpus used for training - e.g 0,1,3')
 parser.add_argument('--log-interval', type=int, default=10, metavar='N',
                     help='how many batches to wait before logging training status')
@@ -87,7 +87,7 @@ class Net(nn.Module):
 
 model = Net()
 if args.cuda:
-    torch.cuda.set_device(3)
+    torch.cuda.set_device(args.gpus)
     model.cuda()
 
 
